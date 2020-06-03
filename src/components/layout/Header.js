@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import { FaSun } from "react-icons/fa";
 
 export const Header = () => {
   return (
@@ -11,7 +12,9 @@ export const Header = () => {
         <div className="settings">
           <ul>
             <li>+</li>
-            <li>Dark Mode</li>
+            <li>
+              <FaSun />
+            </li>
           </ul>
         </div>
       </nav>
