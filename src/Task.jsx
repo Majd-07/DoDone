@@ -10,13 +10,15 @@ const Container = styled.div`
 `;
 export default class Task extends Component {
 	render() {
+		console.log(this.props);
+
 		return (
 			<Draggable draggableId={this.props.task.id} index={this.props.index}>
 				{(provided) => (
 					<Container
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
-						innerRef={provided.innerRef}>
+						ref={provided.innerRef}>
 						{
 							// we have problem here in: innerRef={provided.innerRef}
 						}
