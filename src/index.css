@@ -5,10 +5,90 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: #494f56;
+	background-color: rgb(212, 1, 107);
+}
+.App {
+	background-color: #3f3160;
+	min-height: 500px;
+	width: 95%;
+	margin: 40px auto;
+	border-radius: 10px;
+}
+/******** Add New Stage Form *********/
+#add-stage-form input {
+	background-color: rgba(27, 112, 137, 1);
+	border: 0;
+	color: #fff;
+	width: 150px;
+	height: 50px;
+	margin: 10px;
+	padding: 0 20px;
+	font-size: 18px;
+	border-radius: 10px;
+}
+#add-stage-form p {
+	background-color: rgb(38, 147, 180);
+	justify-content: center;
+	border: 0;
+	color: #fff;
+	width: 150px;
+	height: 50px;
+	margin: 10px;
+	padding: 0 20px;
+	font-size: 18px;
+	border-radius: 10px;
+}
+#add-stage-form input::placeholder {
+	color: rgba(255, 255, 255, 0.5);
+}
+#add-stage-form input:focus {
+	outline: none;
+}
+#add-stage-form button {
+	height: 50px;
+	width: 50px;
+	border-radius: 5px;
+	border: 0;
+	background-color: rgba(202, 156, 24, 1);
+	cursor: pointer;
+}
+#add-stage-form button:focus {
+	outline: none;
 }
 
+/******** Add New Task Form *********/
+#add-new-task-form input {
+	/* background-color: rgb(27, 137, 60); */
+	border: 0;
+	color: rgb(82, 82, 82);
+	width: 100px;
+	height: 30px;
+	margin: 10px;
+	padding: 0 20px;
+	font-size: 18px;
+	border-radius: 10px;
+}
+#add-new-task-form input::placeholder {
+	color: rgba(255, 255, 255, 0.5);
+}
+#add-new-task-form input:focus {
+	outline: none;
+}
+#add-new-task-form button:focus {
+	outline: none;
+}
+#add-new-task-form button {
+	height: 30px;
+	width: 30px;
+	border-radius: 5px;
+	border: 0;
+	background-color: rgba(202, 156, 24, 1);
+	cursor: pointer;
+}
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
+}
+h2 {
+	color: aliceblue;
 }

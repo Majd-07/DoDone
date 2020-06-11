@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import './index.css';
 const Title = styled.h3`
 	padding: 8px;
-	background-color: skyblue;
+	background-color: #9266ff;
 `;
 const Container = styled.div`
 	margin: 8px;
@@ -16,10 +17,12 @@ const Button = (props) => {
 	return (
 		<Container>
 			<form
-			//  onSubmit={props.onClickHandle}
+				id='add-stage-form'
+				//  onSubmit={props.onClickHandle}
 			>
-				<Title>Add Stage</Title>
-				<input type='text' name='stageName' placeholder='Stage Name' />
+				{/* <Title>Add Stage</Title> */}
+				<p>Add Stage</p>
+				<input type='text' name='stageName' placeholder='Enter Stage Name' />
 				<button type='submit' onClick={props.onClickHandle}>
 					+
 				</button>
