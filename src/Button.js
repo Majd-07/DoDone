@@ -18,14 +18,16 @@ const Button = (props) => {
 		<Container>
 			<form
 				id='add-stage-form'
-				//  onSubmit={props.onClickHandle}
+				//  onSubmit={props.addNewColumn}
 			>
 				{/* <Title>Add Stage</Title> */}
 				<p>Add Stage</p>
-				<input type='text' name='stageName' placeholder='Enter Stage Name' />
-				<button type='submit' onClick={props.onClickHandle}>
-					+
-				</button>
+				<div className='form-input-btn-wrapper'>
+					<input type='text' name='stageName' placeholder='Enter Stage Name' />
+					<button type='submit' onClick={props.addNewColumn}>
+						+
+					</button>
+				</div>
 			</form>
 		</Container>
 	);

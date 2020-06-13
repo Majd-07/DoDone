@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import '@atlaskit/css-reset'; // import css library
 import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
 import db from './firebaseConfig';
-import initialData from './initial-data';
+//import initialData from './initial-data';
 import emptyData from './emptyData';
 import Column from './Column.jsx';
 import Button from './Button';
@@ -13,17 +12,13 @@ const Container = styled.div`
 	display: flex;
 `;
 const App = () => {
-	const [data, setData] = useState(initialData);
+	const [data, setData] = useState(emptyData);
 	const fetchData = async () => {
 		const res = await db.collection('ToDo').get();
 		const DB = res.docs.map((data) => data.data());
-		//console.log(posts[0]);
 		setData(DB[0]);
-		//console.log(emptyData);
 	};
-	// useEffect(() => {
-	//
-	// });
+
 	const handlePostFirebase = (e) => {
 		db.collection('ToDo').add(e);
 	};
@@ -135,7 +130,7 @@ const App = () => {
 		console.log(addTask);
 		setData(addTask);
 	};
-	const onClickHandle = (e) => {
+	const addNewColumn = (e) => {
 		e.preventDefault();
 		console.log('btn clicked');
 		//console.log(data);
@@ -158,7 +153,96 @@ const App = () => {
 		console.log(addColumn);
 		setData(addColumn);
 	};
+	const handleDeleteBtn = (e) => {
+		console.log('dlete btn clicked');
+		console.log(e.target.value);
+		console.log(data.tasks[`${e.target.value}`]);
+		console.log(data.tasks);
+		delete data.tasks[`${e.target.value}`];
+		let columnsWithOutDeletedTask = {
+			'': {
+				id: '',
+				title: '',
+				taskIds: [],
+			},
+		};
+		for (let [key] of Object.entries(data.columns)) {
+			console.log(key);
+			// console.log(
+			// 	data.columns[key].taskIds.filter((taskId) => taskId !== e.target.value)
+			// );
 
+			// data.columns[key].taskIds = data.columns[key].taskIds.filter(
+			// 	(taskId) => taskId !== e.target.value
+			// );
+
+			// Object.assign(
+			// 	columnsWithOutDeletedTask,
+			// 	(data.columns[key].taskIds = data.columns[key].taskIds.filter(
+			// 		(taskId) => taskId !== e.target.value
+			// 	))
+			// );
+			console.log(`${data.columns[key].id}`);
+			columnsWithOutDeletedTask = {
+				[`${data.columns[key].id}`]: {
+					...data.columns[key],
+					taskIds: [
+						...data.columns[key].taskIds.filter(
+							(taskId) => taskId !== e.target.value
+						),
+					],
+				},
+			};
+			Object.assign(data.columns, columnsWithOutDeletedTask);
+			//	console.log(data.columns[key].taskIds);
+			//	console.log(columnsWithOutDeletedTask);
+			// setData({
+			// 	...data,
+			// 	columns: {
+			// 		[data.columns[key]]: {
+			// 			...[data.columns[key]],
+			// 			taskIds: data.columns[key].taskIds.filter(
+			// 				(taskId) => taskId !== e.target.value
+			// 			),
+			// 		},
+			// 	},
+			// });
+		}
+		const deletedTask = {
+			...data,
+			tasks: {
+				...data.tasks,
+			},
+		};
+
+		setData(deletedTask);
+		handleUpdateFirebase(deletedTask);
+		console.log(columnsWithOutDeletedTask);
+		console.log(data);
+	};
+
+	const handleTaskInput = (text, id) => {
+		console.log('contenet' + ' ' + text, id);
+		for (let [key] of Object.entries(data.tasks)) {
+			console.log(data.tasks[key]);
+			if (key === id) {
+				data.tasks[key].content = text;
+				setData({
+					...data,
+					tasks: {
+						...data.tasks,
+						[data.tasks[key]]: {
+							...data.tasks[key],
+							content: data.tasks[key].content,
+						},
+					},
+				});
+				handleUpdateFirebase(data);
+			}
+
+			console.log(data.tasks[key].content);
+		}
+	};
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<header>
@@ -176,12 +260,14 @@ const App = () => {
 							column={column}
 							tasks={tasks}
 							addNewTask={addNewTask}
+							handleDeleteBtn={handleDeleteBtn}
+							handleTaskInput={handleTaskInput}
 							// handleTaskInput={handleTaskInput}
 							// handleAddNewTask={handleAddNewTask}
 						/>
 					);
 				})}
-				<Button onClickHandle={onClickHandle} />
+				<Button addNewColumn={addNewColumn} />
 			</Container>
 		</DragDropContext>
 	);

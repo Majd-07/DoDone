@@ -14,13 +14,13 @@ export default function AddTaskForm(props) {
 		setTask({
 			[`${taskID}`]: { id: `${taskID}`, content: e.target.value },
 		});
-		//e.target.value = '';
 	};
 	const handleAddNewTask = (e) => {
 		console.log(task);
 		e.preventDefault();
 		props.addNewTask(task);
-
+		setTask({ taskName: { id: '', content: '' } });
+		console.log(task[Object.keys(task)].content);
 		console.log('btn clicked to submit');
 	};
 	return (
@@ -31,6 +31,7 @@ export default function AddTaskForm(props) {
 				placeholder='Add New Task'
 				onChange={(e) => handleTaskInput(e)}
 				id={props.id}
+				value={task[Object.keys(task)].content}
 			/>
 			<button type='submit'>+</button>
 		</form>
