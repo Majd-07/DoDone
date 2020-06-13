@@ -3,31 +3,65 @@
 } */
 
 @media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
-	}
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 .App-header {
-	background-color: #282c34;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
 .App-link {
-	color: #61dafb;
+  color: #61dafb;
+}
+
+.Navbar {
+  background-color: #282c34;
+  padding: 10px 10px;
+}
+
+.react-select-container {
+  display: inline-block;
+  width: 200px;
+  margin-left: 20px;
+}
+
+.mySpan {
+  position: absolute;
+  top: 5px;
+  left: 180px;
+  text-align: center;
+  background-color: #fff;
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.popup {
+  position: absolute;
+  top: 25px;
+  right: -75px;
+  z-index: 100;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
 }
 
 @keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
