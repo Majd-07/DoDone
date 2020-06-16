@@ -13,6 +13,7 @@ const Container = styled.div`
 `;
 const App = () => {
 	const [data, setData] = useState(emptyData);
+
 	const fetchData = async () => {
 		const res = await db.collection('ToDo').get();
 		const DB = res.docs.map((data) => data.data());
