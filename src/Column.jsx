@@ -37,13 +37,19 @@ const Column = (props) => {
   const onClick = () => !setShowPopOver(!showPopOver);
 
   const [column, setColumn] = [];
-  //console.log(props);
+  console.log(props);
   return (
     <Container>
       <span className="mySpan" onClick={onClick}>
         ...
       </span>
-      {showPopOver ? <Sort /> : null}
+      {showPopOver ? (
+        <Sort
+          handleSortAz={props.handleSortAz}
+          handleSortZa={props.handleSortZa}
+          taskIds={props.column.taskIds}
+        />
+      ) : null}
       <Title>{props.column.title}</Title>
       {props.column.title === "To Do" && (
         <AddTaskForm addNewTask={props.addNewTask} id={props.column.id} />
