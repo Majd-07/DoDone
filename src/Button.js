@@ -1,6 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import './index.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		'& > *': {
+			margin: theme.spacing(1),
+		},
+	},
+}));
 const Title = styled.h3`
 	padding: 8px;
 	background-color: #9266ff;
@@ -14,6 +24,7 @@ const Container = styled.div`
 	flex-direction: column;
 `;
 const Button = (props) => {
+	const classes = useStyles();
 	return (
 		<Container>
 			<form

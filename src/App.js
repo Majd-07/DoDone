@@ -6,10 +6,12 @@ import db from './firebaseConfig';
 import initialData from './initial-data';
 import emptyData from './emptyData';
 import Column from './Column.jsx';
-//import sortByTitleAz from "./components/Sort";
-//import sortByTitleZa from "./components/Sort";
 import Button from './Button';
 import './index.css';
+import NestedList from './components/List';
+import Switch from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 const Container = styled.div`
 	display: flex;
 `;
@@ -40,7 +42,6 @@ const App = () => {
 	}, []);
 
 	const onDragEnd = (result) => {
-		console.log('onDragDrop');
 		const { destination, source, draggableId } = result;
 		if (!destination) {
 			return;
@@ -100,7 +101,6 @@ const App = () => {
 				[newFinishColumn.id]: newFinishColumn,
 			},
 		};
-		console.log('dif');
 		setData(newState);
 		handleUpdateFirebase(newState);
 		// handleUpdateColumnsFirebase(newState.columns);
@@ -108,9 +108,6 @@ const App = () => {
 		return;
 	};
 	const addNewTask = (newTask) => {
-		console.log(newTask);
-		console.log(newTask[Object.keys(newTask)].id);
-		console.log(Object.keys(newTask));
 		const addTask = {
 			...data,
 			tasks: {
@@ -128,14 +125,11 @@ const App = () => {
 				},
 			},
 		};
-
-		console.log(addTask);
 		setData(addTask);
 	};
 	const addNewColumn = (e) => {
+		console.log(e.target.value);
 		e.preventDefault();
-		console.log('btn clicked');
-		//console.log(data);
 		const addColumn = {
 			...data,
 			tasks: {
@@ -152,12 +146,9 @@ const App = () => {
 			},
 			columnOrder: [...data.columnOrder, e.target.previousSibling.value],
 		};
-		console.log(addColumn);
 		setData(addColumn);
 	};
 	const handleDeleteBtn = (e) => {
-		console.log(data.tasks[`${e.target.value}`]);
-		console.log(data.tasks);
 		delete data.tasks[`${e.target.value}`];
 		let columnsWithOutDeletedTask = {
 			'': {
@@ -167,22 +158,6 @@ const App = () => {
 			},
 		};
 		for (let [key] of Object.entries(data.columns)) {
-			console.log(key);
-			// console.log(
-			// 	data.columns[key].taskIds.filter((taskId) => taskId !== e.target.value)
-			// );
-
-			// data.columns[key].taskIds = data.columns[key].taskIds.filter(
-			// 	(taskId) => taskId !== e.target.value
-			// );
-
-			// Object.assign(
-			// 	columnsWithOutDeletedTask,
-			// 	(data.columns[key].taskIds = data.columns[key].taskIds.filter(
-			// 		(taskId) => taskId !== e.target.value
-			// 	))
-			// );
-			console.log(`${data.columns[key].id}`);
 			columnsWithOutDeletedTask = {
 				[`${data.columns[key].id}`]: {
 					...data.columns[key],
@@ -194,19 +169,6 @@ const App = () => {
 				},
 			};
 			Object.assign(data.columns, columnsWithOutDeletedTask);
-			//	console.log(data.columns[key].taskIds);
-			//	console.log(columnsWithOutDeletedTask);
-			// setData({
-			// 	...data,
-			// 	columns: {
-			// 		[data.columns[key]]: {
-			// 			...[data.columns[key]],
-			// 			taskIds: data.columns[key].taskIds.filter(
-			// 				(taskId) => taskId !== e.target.value
-			// 			),
-			// 		},
-			// 	},
-			// });
 		}
 		const deletedTask = {
 			...data,
@@ -217,14 +179,10 @@ const App = () => {
 
 		setData(deletedTask);
 		handleUpdateFirebase(deletedTask);
-		console.log(columnsWithOutDeletedTask);
-		console.log(data);
 	};
 
 	const handleTaskInput = (text, id) => {
-		console.log('contenet' + ' ' + text, id);
 		for (let [key] of Object.entries(data.tasks)) {
-			console.log(data.tasks[key]);
 			if (key === id) {
 				data.tasks[key].content = text;
 				setData({
@@ -239,8 +197,6 @@ const App = () => {
 				});
 				handleUpdateFirebase(data);
 			}
-
-			console.log(data.tasks[key].content);
 		}
 	};
 	// const compare = (a, b) => {
@@ -294,30 +250,65 @@ const App = () => {
 		});
 	};
 
+	//Handle Changing display layout
+	const [state, setState] = React.useState({
+		checkedA: false,
+		checkedB: true,
+	});
+
+	const handleDisplayLayoutChange = (event) => {
+		setState({ ...state, [event.target.name]: event.target.checked });
+
+		console.log('display change layout');
+	};
+
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<header>
 				<h2>To Do</h2>
 				<br />
+				{/* <Typography component='div'>
+				<Grid component='label' container alignItems='center' spacing={1}>
+					<Grid item>Off</Grid>
+					<Grid item> */}
+				{<span style={{ color: 'white' }}>Grid</span>}
+				<Switch
+					checked={state.checkedA}
+					onChange={handleDisplayLayoutChange}
+					name='checkedA'
+					inputProps={{ 'aria-label': 'secondary checkbox' }}
+				/>
+				{<span style={{ color: 'white' }}>List</span>}
+				{/* </Grid>
+					<Grid item>On</Grid>
+				</Grid>
+			</Typography> */}
 			</header>
+
 			<Container className='App'>
 				{data.columnOrder.map((columnId) => {
 					const column = data.columns[columnId];
 					const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
-					//console.log(tasks);
 					return (
-						<Column
-							key={column.id}
-							column={column}
-							tasks={tasks}
-							addNewTask={addNewTask}
-							handleDeleteBtn={handleDeleteBtn}
-							handleTaskInput={handleTaskInput}
-							handleSortAz={sortByTitleAz}
-							handleSortZa={sortByTitleZa}
-							// handleTaskInput={handleTaskInput}
-							// handleAddNewTask={handleAddNewTask}
-						/>
+						<React.Fragment>
+							{state.checkedA ? (
+								<NestedList column={column} tasks={tasks} />
+							) : (
+								<Column
+									key={column.id}
+									column={column}
+									tasks={tasks}
+									addNewTask={addNewTask}
+									handleDeleteBtn={handleDeleteBtn}
+									handleTaskInput={handleTaskInput}
+									handleSortAz={sortByTitleAz}
+									handleSortZa={sortByTitleZa}
+									handleDisplayLayoutChange={handleDisplayLayoutChange}
+									// handleTaskInput={handleTaskInput}
+									// handleAddNewTask={handleAddNewTask}
+								/>
+							)}
+						</React.Fragment>
 					);
 				})}
 				<Button addNewColumn={addNewColumn} />
