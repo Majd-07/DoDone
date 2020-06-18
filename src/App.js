@@ -3,17 +3,18 @@ import '@atlaskit/css-reset'; // import css library
 import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
 import db from './firebaseConfig';
-//import initialData from './initial-data';
+import initialData from './initial-data';
 import emptyData from './emptyData';
 import Column from './Column.jsx';
+//import sortByTitleAz from "./components/Sort";
+//import sortByTitleZa from "./components/Sort";
 import Button from './Button';
 import './index.css';
 const Container = styled.div`
 	display: flex;
 `;
 const App = () => {
-	const [data, setData] = useState(emptyData);
-
+	const [data, setData] = useState(initialData);
 	const fetchData = async () => {
 		const res = await db.collection('ToDo').get();
 		const DB = res.docs.map((data) => data.data());
@@ -34,7 +35,7 @@ const App = () => {
 		console.log(db.collection('tasks'));
 	};
 	useEffect(() => {
-		fetchData();
+		//fetchData();
 		console.log('data fetching');
 	}, []);
 
@@ -155,8 +156,6 @@ const App = () => {
 		setData(addColumn);
 	};
 	const handleDeleteBtn = (e) => {
-		console.log('dlete btn clicked');
-		console.log(e.target.value);
 		console.log(data.tasks[`${e.target.value}`]);
 		console.log(data.tasks);
 		delete data.tasks[`${e.target.value}`];
@@ -244,6 +243,57 @@ const App = () => {
 			console.log(data.tasks[key].content);
 		}
 	};
+	// const compare = (a, b) => {
+	// 	// Use toUpperCase() to ignore character casing
+
+	// 	const bandA = a.band.toUpperCase();
+	// 	const bandB = b.band.toUpperCase();
+
+	// 	let comparison = 0;
+	// 	if (bandA > bandB) {
+	// 		comparison = 1;
+	// 	} else if (bandA < bandB) {
+	// 		comparison = -1;
+	// 	}
+	// 	return comparison;
+	// };
+
+	//singers.sort(compare);
+	const sortByTitleAz = (column) => {
+		const sortedTasks = column.taskIds.sort((a, b) => {
+			if (
+				data.tasks[a].content.toUpperCase() >
+				data.tasks[b].content.toUpperCase()
+			) {
+				return 1;
+			} else if (
+				data.tasks[a].content.toUpperCase() <
+				data.tasks[b].content.toUpperCase()
+			) {
+				return -1;
+			} else {
+				return 0;
+			}
+		});
+	};
+	const sortByTitleZa = (column) => {
+		const sortedTasks = column.taskIds.sort((a, b) => {
+			if (
+				data.tasks[a].content.toUpperCase() >
+				data.tasks[b].content.toUpperCase()
+			) {
+				return -1;
+			} else if (
+				data.tasks[a].content.toUpperCase() <
+				data.tasks[b].content.toUpperCase()
+			) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+	};
+
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<header>
@@ -254,7 +304,7 @@ const App = () => {
 				{data.columnOrder.map((columnId) => {
 					const column = data.columns[columnId];
 					const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
-					console.log(tasks);
+					//console.log(tasks);
 					return (
 						<Column
 							key={column.id}
@@ -263,6 +313,8 @@ const App = () => {
 							addNewTask={addNewTask}
 							handleDeleteBtn={handleDeleteBtn}
 							handleTaskInput={handleTaskInput}
+							handleSortAz={sortByTitleAz}
+							handleSortZa={sortByTitleZa}
 							// handleTaskInput={handleTaskInput}
 							// handleAddNewTask={handleAddNewTask}
 						/>
