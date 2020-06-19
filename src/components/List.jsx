@@ -32,17 +32,9 @@ export default function NestedList(props) {
 		setOpen(!open);
 	};
 	console.log(props);
-	//console.log(props.task);
+
 	return (
-		<List
-			component='nav'
-			aria-labelledby='nested-list-subheader'
-			subheader={
-				<ListSubheader component='div' id='nested-list-subheader'>
-					To Do App
-				</ListSubheader>
-			}
-			className={classes.root}>
+		<>
 			<ListItem button onClick={handleClick}>
 				<ListItemIcon>
 					<InboxIcon />
@@ -67,6 +59,6 @@ export default function NestedList(props) {
 					))}
 				</List>
 			</Collapse>
-		</List>
+		</>
 	);
 }

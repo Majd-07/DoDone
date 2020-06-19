@@ -8,10 +8,12 @@ import emptyData from './emptyData';
 import Column from './Column.jsx';
 import Button from './Button';
 import './index.css';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import NestedList from './components/List';
 import Switch from '@material-ui/core/Switch';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+
 const Container = styled.div`
 	display: flex;
 `;
@@ -37,7 +39,7 @@ const App = () => {
 		console.log(db.collection('tasks'));
 	};
 	useEffect(() => {
-		//fetchData();
+		fetchData();
 		console.log('data fetching');
 	}, []);
 
@@ -199,22 +201,7 @@ const App = () => {
 			}
 		}
 	};
-	// const compare = (a, b) => {
-	// 	// Use toUpperCase() to ignore character casing
 
-	// 	const bandA = a.band.toUpperCase();
-	// 	const bandB = b.band.toUpperCase();
-
-	// 	let comparison = 0;
-	// 	if (bandA > bandB) {
-	// 		comparison = 1;
-	// 	} else if (bandA < bandB) {
-	// 		comparison = -1;
-	// 	}
-	// 	return comparison;
-	// };
-
-	//singers.sort(compare);
 	const sortByTitleAz = (column) => {
 		const sortedTasks = column.taskIds.sort((a, b) => {
 			if (
@@ -261,16 +248,23 @@ const App = () => {
 
 		console.log('display change layout');
 	};
-
+	const useStyles = makeStyles((theme) => ({
+		root: {
+			width: '100%',
+			maxWidth: 360,
+			backgroundColor: theme.palette.background.paper,
+		},
+		nested: {
+			paddingLeft: theme.spacing(4),
+		},
+	}));
+	const classes = useStyles();
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<header>
 				<h2>To Do</h2>
 				<br />
-				{/* <Typography component='div'>
-				<Grid component='label' container alignItems='center' spacing={1}>
-					<Grid item>Off</Grid>
-					<Grid item> */}
+
 				{<span style={{ color: 'white' }}>Grid</span>}
 				<Switch
 					checked={state.checkedA}
@@ -279,40 +273,51 @@ const App = () => {
 					inputProps={{ 'aria-label': 'secondary checkbox' }}
 				/>
 				{<span style={{ color: 'white' }}>List</span>}
-				{/* </Grid>
-					<Grid item>On</Grid>
-				</Grid>
-			</Typography> */}
 			</header>
+			{state.checkedA ? (
+				<Container className='App'>
+					<List
+						component='nav'
+						aria-labelledby='nested-list-subheader'
+						subheader={
+							<ListSubheader component='div' id='nested-list-subheader'>
+								To Do App
+							</ListSubheader>
+						}
+						className={classes.root}>
+						{data.columnOrder.map((columnId) => {
+							const column = data.columns[columnId];
+							const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
+							return <NestedList column={column} tasks={tasks} />;
+						})}
+					</List>
 
-			<Container className='App'>
-				{data.columnOrder.map((columnId) => {
-					const column = data.columns[columnId];
-					const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
-					return (
-						<React.Fragment>
-							{state.checkedA ? (
-								<NestedList column={column} tasks={tasks} />
-							) : (
-								<Column
-									key={column.id}
-									column={column}
-									tasks={tasks}
-									addNewTask={addNewTask}
-									handleDeleteBtn={handleDeleteBtn}
-									handleTaskInput={handleTaskInput}
-									handleSortAz={sortByTitleAz}
-									handleSortZa={sortByTitleZa}
-									handleDisplayLayoutChange={handleDisplayLayoutChange}
-									// handleTaskInput={handleTaskInput}
-									// handleAddNewTask={handleAddNewTask}
-								/>
-							)}
-						</React.Fragment>
-					);
-				})}
-				<Button addNewColumn={addNewColumn} />
-			</Container>
+					<Button addNewColumn={addNewColumn} />
+				</Container>
+			) : (
+				<Container className='App'>
+					{data.columnOrder.map((columnId) => {
+						const column = data.columns[columnId];
+						const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
+						return (
+							<Column
+								key={column.id}
+								column={column}
+								tasks={tasks}
+								addNewTask={addNewTask}
+								handleDeleteBtn={handleDeleteBtn}
+								handleTaskInput={handleTaskInput}
+								handleSortAz={sortByTitleAz}
+								handleSortZa={sortByTitleZa}
+								handleDisplayLayoutChange={handleDisplayLayoutChange}
+								// handleTaskInput={handleTaskInput}
+								// handleAddNewTask={handleAddNewTask}
+							/>
+						);
+					})}
+					<Button addNewColumn={addNewColumn} />
+				</Container>
+			)}
 		</DragDropContext>
 	);
 };
