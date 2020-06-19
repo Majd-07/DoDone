@@ -4,6 +4,17 @@ import { Droppable } from "react-beautiful-dnd";
 import Task from "./Task";
 import Sort from "./components/Sort";
 import AddTaskForm from "./AddTaskForm";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import "./index.css";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: "15px",
+    backgroundColor: "#EBECF0",
+  },
+}));
+
 const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
@@ -13,33 +24,36 @@ const Container = styled.div`
   flex-direction: column;
   border-radius: 10px;
   position: relative;
+  overflow: scroll;
 `;
-const Title = styled.h3`
+const Title = styled.h4`
   padding: 8px;
-  background-color: lightgrey;
+  background-color: #ebecf0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 0;
 `;
 
 const TaskList = styled.div`
   padding: 8px;
   transition: background-color 0.2s ease;
-  background-color: ${(props) =>
-    props.isDraggingOver ? "skyblue" : "#9266ff"};
+  background-color: ${(props) => (props.isDraggingOver ? "f2f3f7" : "#EBECF0")};
   flex-grow: 1;
   min-height: 100px;
 `;
 
 const Column = (props) => {
+  const classes = useStyles();
+
   const [showPopOver, setShowPopOver] = React.useState(false);
   const onClick = () => !setShowPopOver(!showPopOver);
 
   const [column, setColumn] = [];
   console.log(props);
   return (
-    <Container>
+    <Paper elevation={3} className={classes.root}>
       <span className="mySpan" onClick={onClick}>
         ...
       </span>
@@ -51,9 +65,7 @@ const Column = (props) => {
         />
       ) : null}
       <Title>{props.column.title}</Title>
-      {props.column.title === "To Do" && (
-        <AddTaskForm addNewTask={props.addNewTask} id={props.column.id} />
-      )}
+
       <Droppable
         droppableId={props.column.id}
         // type={props.column.id === 'column-3' ? 'active' : 'done'}
@@ -77,7 +89,10 @@ const Column = (props) => {
           </TaskList>
         )}
       </Droppable>
-    </Container>
+      {props.column.title === "To Do" && (
+        <AddTaskForm addNewTask={props.addNewTask} id={props.column.id} />
+      )}
+    </Paper>
   );
 };
 

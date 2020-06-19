@@ -1,25 +1,34 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import ColumnsFilter from "./ColumnsFilter";
+import AppBar from "@material-ui/core/AppBar";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import { palette, spacing, typography } from "@material-ui/system";
 
 const link = {
-  padding: "12px",
-  margin: "0 6px 6px",
   textDecoration: "none",
   color: "white",
+  marginLeft: "10px",
+  marginRight: "20px",
+  fontSize: "18px",
+  fontWeight: "bold",
+  color: "black",
 };
 
 const Navbar = () => (
-  <div className="Navbar">
-    <NavLink to="/" style={link}>
-      Boards
-    </NavLink>
+  <AppBar position="static" color="white" display="inline-block">
+    <List display="inline-block">
+      <NavLink to="/" style={link}>
+        Boards
+      </NavLink>
 
-    <NavLink to="/about" style={link}>
-      About
-    </NavLink>
-    <ColumnsFilter />
-  </div>
+      <NavLink to="/about" style={link}>
+        About
+      </NavLink>
+    </List>
+  </AppBar>
 );
 
 export default Navbar;

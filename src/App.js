@@ -9,7 +9,7 @@ import Column from "./Column.jsx";
 //import sortByTitleAz from "./components/Sort";
 //import sortByTitleZa from "./components/Sort";
 import Button from "./Button";
-import "./index.css";
+//import "./index.css";
 const Container = styled.div`
   display: flex;
 `;
@@ -278,11 +278,7 @@ const App = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <header>
-        <h2>To Do</h2>
-        <br />
-      </header>
-      <Container className="App">
+      <Container>
         {data.columnOrder.map((columnId) => {
           const column = data.columns[columnId];
           const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
