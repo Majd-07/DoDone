@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import './index.css';
+import '../index.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 
@@ -25,6 +25,11 @@ const Container = styled.div`
 `;
 const Button = (props) => {
 	const classes = useStyles();
+	const [inputValue, setInputValue] = useState('');
+	const handleOnChange = (e) => {
+		console.log(e);
+		setInputValue(e.target.value);
+	};
 	return (
 		<Container>
 			<form
@@ -34,8 +39,15 @@ const Button = (props) => {
 				{/* <Title>Add Stage</Title> */}
 				<p>Add Stage</p>
 				<div className='form-input-btn-wrapper'>
-					<input type='text' name='stageName' placeholder='Enter Stage Name' />
-					<button type='submit' onClick={props.addNewColumn}>
+					<input
+						type='text'
+						name='stageName'
+						placeholder='Enter Stage Name'
+						onChange={handleOnChange}
+					/>
+					<button
+						type='submit'
+						onClick={(e) => props.addNewColumn(e, inputValue)}>
 						+
 					</button>
 				</div>

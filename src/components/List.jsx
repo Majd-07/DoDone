@@ -12,6 +12,7 @@ import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -37,7 +38,7 @@ export default function NestedList(props) {
 		<>
 			<ListItem button onClick={handleClick}>
 				<ListItemIcon>
-					<InboxIcon />
+					<AssignmentIcon />
 				</ListItemIcon>
 				<ListItemText primary={props.column.title} />
 				{open ? <ExpandLess /> : <ExpandMore />}

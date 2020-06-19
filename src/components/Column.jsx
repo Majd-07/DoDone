@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 import Task from './Task';
-import Sort from './components/Sort';
+import Sort from './Sort';
 import AddTaskForm from './AddTaskForm';
 const Container = styled.div`
 	margin: 8px;
@@ -16,11 +16,14 @@ const Container = styled.div`
 `;
 const Title = styled.h3`
 	padding: 8px;
+
 	background-color: lightgrey;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 5px;
+	border-radius: inherit;
 `;
 
 const TaskList = styled.div`
@@ -30,6 +33,7 @@ const TaskList = styled.div`
 		props.isDraggingOver ? 'skyblue' : '#9266ff'};
 	flex-grow: 1;
 	min-height: 100px;
+	border-radius: inherit;
 `;
 
 const Column = (props) => {

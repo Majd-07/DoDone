@@ -1,151 +1,151 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #d4016b;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #d4016b;
 }
 .App {
-  background-color: #3f3160;
-  min-height: 500px;
-  width: 95%;
-  margin: 40px auto;
-  border-radius: 10px;
+	background-color: #3f3160;
+	min-height: 500px;
+	max-width: 95%;
+	margin: 40px auto;
+	border-radius: 10px;
 }
 /******** Add New Stage Form *********/
 .form-input-btn-wrapper {
-  position: relative;
+	position: relative;
 }
 #add-stage-form input {
-  background-color: rgba(27, 112, 137, 1);
-  border: 0;
-  color: #fff;
-  width: 150px;
-  height: 50px;
-  margin: 10px;
-  padding: 0 20px;
-  font-size: 18px;
-  border-radius: 10px;
+	background-color: rgba(27, 112, 137, 1);
+	border: 0;
+	color: #fff;
+	width: 150px;
+	height: 50px;
+	margin: 10px;
+	padding: 0 20px;
+	font-size: 18px;
+	border-radius: 10px;
 }
 #add-stage-form p {
-  background-color: rgb(38, 147, 180);
-  justify-content: center;
-  border: 0;
-  color: #fff;
-  width: 150px;
-  height: 50px;
-  margin: 10px;
-  padding: 0 20px;
-  font-size: 18px;
-  border-radius: 10px;
+	background-color: rgb(38, 147, 180);
+	justify-content: center;
+	border: 0;
+	color: #fff;
+	width: 150px;
+	height: 50px;
+	margin: 10px;
+	padding: 0 20px;
+	font-size: 18px;
+	border-radius: 10px;
 }
 #add-stage-form input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+	color: rgba(255, 255, 255, 0.5);
 }
 #add-stage-form input:focus {
-  outline: none;
+	outline: none;
 }
 #add-stage-form button {
-  height: 50px;
-  width: 50px;
-  border-radius: 5px;
-  border: 0;
-  background-color: rgba(202, 156, 24, 1);
-  cursor: pointer;
-  position: absolute;
-  /* right: 5px; */
+	height: 50px;
+	width: 50px;
+	border-radius: 5px;
+	border: 0;
+	background-color: rgba(202, 156, 24, 1);
+	cursor: pointer;
+	position: absolute;
+	/* right: 5px; */
 }
 #add-stage-form button:focus {
-  outline: none;
+	outline: none;
 }
 
 /******** Add New Task Form *********/
 
 #add-new-task-form input {
-  /* background-color: rgb(27, 137, 60); */
-  border: 0;
-  color: rgb(82, 82, 82);
-  width: 100px;
-  height: 30px;
-  margin: 10px;
-  padding: 0 20px;
-  font-size: 18px;
-  border-radius: 10px;
+	/* background-color: rgb(27, 137, 60); */
+	border: 0;
+	color: rgb(82, 82, 82);
+	width: 100px;
+	height: 30px;
+	margin: 10px;
+	padding: 0 20px;
+	font-size: 18px;
+	border-radius: 10px;
 }
 #add-new-task-form input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+	color: rgba(255, 255, 255, 0.5);
 }
 #add-new-task-form input:focus {
-  outline: none;
+	outline: none;
 }
 #add-new-task-form button:focus {
-  outline: none;
+	outline: none;
 }
 #add-new-task-form button {
-  height: 30px;
-  width: 30px;
-  border-radius: 5px;
-  border: 0;
-  background-color: rgba(202, 156, 24, 1);
-  cursor: pointer;
+	height: 30px;
+	width: 30px;
+	border-radius: 5px;
+	border: 0;
+	background-color: rgba(202, 156, 24, 1);
+	cursor: pointer;
 }
 .task-board input {
-  background-color: transparent;
-  border: 0;
-  color: #fff;
-  font-size: 14px;
+	background-color: transparent;
+	border: 0;
+	color: #fff;
+	font-size: 14px;
 }
 .task-board input:focus {
-  outline: none;
+	outline: none;
 }
 .task-board {
-  position: relative;
+	position: relative;
 }
 .delete-Btn {
-  position: absolute;
-  right: 1px;
+	position: absolute;
+	right: 1px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }
 h2 {
-  color: aliceblue;
+	color: aliceblue;
 }
 
 .Navbar {
-  background-color: #282c34;
-  padding: 10px 10px;
+	background-color: #282c34;
+	padding: 10px 10px;
 }
 
 .react-select-container {
-  display: inline-block;
-  width: 200px;
-  margin-left: 20px;
+	display: inline-block;
+	width: 200px;
+	margin-left: 20px;
 }
 
 .mySpan {
-  position: absolute;
-  top: 5px;
-  left: 180px;
-  text-align: center;
-  background-color: #fff;
-  height: 20px;
-  width: 20px;
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
+	position: absolute;
+	top: 5px;
+	left: 180px;
+	text-align: center;
+	background-color: #fff;
+	height: 20px;
+	width: 20px;
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
 }
 
 .popup {
-  position: absolute;
-  top: 25px;
-  right: -75px;
-  z-index: 100;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #fff;
+	position: absolute;
+	top: 25px;
+	right: -75px;
+	z-index: 100;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #fff;
 }

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import './index.css';
+//import { v4 as uuidv4 } from 'uuid';
+import '../index.css';
 
 export default function AddTaskForm(props) {
 	//console.log(props);
 	const [task, setTask] = useState({ taskName: { id: '', content: '' } });
-	let x = 10;
-	let taskName = `task${x}`;
+	//let x = 10;
+	//let taskName = `task${x}`;
 	const handleTaskInput = (e) => {
 		//let taskID = uuidv4();
 		let taskID = Date.now();
@@ -18,7 +18,8 @@ export default function AddTaskForm(props) {
 	const handleAddNewTask = (e) => {
 		console.log(task);
 		e.preventDefault();
-		props.addNewTask(task);
+		console.log(props.id);
+		props.addNewTask(task, props.id);
 		setTask({ taskName: { id: '', content: '' } });
 		console.log(task[Object.keys(task)].content);
 		console.log('btn clicked to submit');

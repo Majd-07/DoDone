@@ -5,39 +5,54 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import db from './firebaseConfig';
 import initialData from './initial-data';
 import emptyData from './emptyData';
-import Column from './Column.jsx';
-import Button from './Button';
+import Column from './components/Column.jsx';
+import Button from './components/Button';
 import './index.css';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import NestedList from './components/List';
 import Switch from '@material-ui/core/Switch';
+// import {
+// 	handlePostFirebase,
+// 	handleUpdateFirebase,
+// 	handleUpdateColumnsFirebase,
+// 	handleUpdateTasksFirebase,
+// 	fetchData,
+// 	onDragEnd,
+// 	addNewTask,
+// 	addNewColumn,
+// 	handleDeleteBtn,
+// 	handleTaskInput,
+// 	sortByTitleAz,
+// 	sortByTitleZa,
+// } from './actions/functions';
 
 const Container = styled.div`
 	display: flex;
 `;
+
 const App = () => {
-	const [data, setData] = useState(initialData);
+	const [data, setData] = useState(emptyData);
 	const fetchData = async () => {
 		const res = await db.collection('ToDo').get();
 		const DB = res.docs.map((data) => data.data());
 		setData(DB[0]);
 	};
 
-	const handlePostFirebase = (e) => {
-		db.collection('ToDo').add(e);
-	};
+	// const handlePostFirebase = (e) => {
+	// 	db.collection('ToDo').add(e);
+	// };
 	const handleUpdateFirebase = (e) => {
 		db.collection('ToDo').doc('OYOcvEIrXuxkKLo5Ndb9').update(e);
 	};
-	const handleUpdateColumnsFirebase = (e) => {
-		db.collection('columns').doc('LQdCpnOyXZib1pObRUlM').update(e);
-	};
-	const handleUpdateTasksFirebase = (e) => {
-		db.collection('tasks').doc('v1rprG5YWMpnZxcvObuL').update(e);
-		console.log(db.collection('tasks'));
-	};
+	// const handleUpdateColumnsFirebase = (e) => {
+	// 	db.collection('columns').doc('LQdCpnOyXZib1pObRUlM').update(e);
+	// };
+	// const handleUpdateTasksFirebase = (e) => {
+	// 	db.collection('tasks').doc('v1rprG5YWMpnZxcvObuL').update(e);
+	// 	console.log(db.collection('tasks'));
+	// };
 	useEffect(() => {
 		fetchData();
 		console.log('data fetching');
@@ -109,49 +124,64 @@ const App = () => {
 		// handleUpdateTasksFirebase(newState.tasks);
 		return;
 	};
-	const addNewTask = (newTask) => {
-		const addTask = {
-			...data,
-			tasks: {
-				...data.tasks,
-				...newTask,
-			},
-			columns: {
-				...data.columns,
-				'column-1': {
-					...data.columns['column-1'],
-					taskIds: [
-						...data.columns['column-1'].taskIds,
-						newTask[Object.keys(newTask)].id,
-					],
+	const addNewTask = (newTask, id) => {
+		if (newTask[Object.keys(newTask)].content) {
+			const addTask = {
+				...data,
+				tasks: {
+					...data.tasks,
+					...newTask,
 				},
-			},
-		};
-		setData(addTask);
+				columns: {
+					...data.columns,
+					[`${id}`]: {
+						...data.columns[`${id}`],
+						taskIds: [
+							...data.columns[`${id}`].taskIds,
+							newTask[Object.keys(newTask)].id,
+						],
+					},
+				},
+			};
+			setData(addTask);
+		} else {
+			console.log('An empty task added');
+			alert('You cant Add An empty task');
+			return;
+		}
 	};
-	const addNewColumn = (e) => {
-		console.log(e.target.value);
+	const addNewColumn = (e, value) => {
 		e.preventDefault();
-		const addColumn = {
-			...data,
-			tasks: {
-				...data.tasks,
-				//	'task-1': { id: 'task-1', content: 'Take out the garbage' },
-			},
-			columns: {
-				...data.columns,
-				[e.target.previousSibling.value]: {
-					id: e.target.previousSibling.value,
-					title: e.target.previousSibling.value,
-					taskIds: [],
+		if (value) {
+			let NewColumnID = Date.now();
+			const addColumn = {
+				...data,
+				tasks: {
+					...data.tasks,
+					//	'task-1': { id: 'task-1', content: 'Take out the garbage' },
 				},
-			},
-			columnOrder: [...data.columnOrder, e.target.previousSibling.value],
-		};
-		setData(addColumn);
+				columns: {
+					...data.columns,
+					[`${NewColumnID}`]: {
+						id: `${NewColumnID}`,
+						title: value,
+						taskIds: [],
+					},
+				},
+				columnOrder: [...data.columnOrder, `${NewColumnID}`],
+			};
+			console.log(addColumn);
+			setData(addColumn);
+		} else {
+			console.log('An empty column added');
+			alert('You cant Add An empty Column Name');
+			return;
+		}
 	};
 	const handleDeleteBtn = (e) => {
-		delete data.tasks[`${e.target.value}`];
+		console.log(e + 'delete Btn Clicked');
+
+		delete data.tasks[`${e}`];
 		let columnsWithOutDeletedTask = {
 			'': {
 				id: '',
@@ -164,9 +194,7 @@ const App = () => {
 				[`${data.columns[key].id}`]: {
 					...data.columns[key],
 					taskIds: [
-						...data.columns[key].taskIds.filter(
-							(taskId) => taskId !== e.target.value
-						),
+						...data.columns[key].taskIds.filter((taskId) => taskId !== e),
 					],
 				},
 			};
@@ -218,6 +246,16 @@ const App = () => {
 				return 0;
 			}
 		});
+		setData({
+			...data,
+			columns: {
+				...data.columns,
+				[column]: {
+					...data.columns[column],
+					taskIds: sortedTasks,
+				},
+			},
+		});
 	};
 	const sortByTitleZa = (column) => {
 		const sortedTasks = column.taskIds.sort((a, b) => {
@@ -234,6 +272,16 @@ const App = () => {
 			} else {
 				return 0;
 			}
+		});
+		setData({
+			...data,
+			columns: {
+				...data.columns,
+				[column]: {
+					...data.columns[column],
+					taskIds: sortedTasks,
+				},
+			},
 		});
 	};
 
@@ -291,8 +339,6 @@ const App = () => {
 							return <NestedList column={column} tasks={tasks} />;
 						})}
 					</List>
-
-					<Button addNewColumn={addNewColumn} />
 				</Container>
 			) : (
 				<Container className='App'>
