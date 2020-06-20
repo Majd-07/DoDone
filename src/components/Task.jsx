@@ -10,7 +10,7 @@ const Container = styled.div`
 	border-radius: 3px;
 	padding: 4px 3px;
 	margin-bottom: 8px;
-	background-color: ${(props) => (props.isDragging ? '#fff' : '#f4f5f7')};
+	background-color: ${(props) => (props.isDragging ? 'lightgreen' : '#d4016b')};
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +45,7 @@ const Task = (props) => {
 								value={props.task.id}
 								className={classes.iconButton}
 								color='primary'>
-								<DeleteIcon style={{ color: '#607d8b' }} fontSize='small' />
+								<DeleteIcon style={{ color: '#fce4ec' }} fontSize='small' />
 							</IconButton>
 						</div>
 					</Container>

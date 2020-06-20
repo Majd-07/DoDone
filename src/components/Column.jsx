@@ -36,7 +36,7 @@ const TaskList = styled.div`
 	padding: 8px;
 	transition: background-color 0.2s ease;
 	background-color: ${(props) =>
-		props.isDraggingOver ? '#e2e2e2' : '#ebecf0'};
+		props.isDraggingOver ? 'skyblue' : '#9266ff'};
 	flex-grow: 1;
 	min-height: 100px;
 	border-radius: 10px;

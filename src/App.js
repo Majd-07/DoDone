@@ -312,7 +312,7 @@ const App = () => {
 	const classes = useStyles();
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
-			<header>
+			<header className='app-header'>
 				<h2>To Do</h2>
 				<br />
 
