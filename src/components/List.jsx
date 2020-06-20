@@ -12,7 +12,6 @@ import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -33,12 +32,20 @@ export default function NestedList(props) {
 		setOpen(!open);
 	};
 	console.log(props);
-
+	//console.log(props.task);
 	return (
-		<>
+		<List
+			component='nav'
+			aria-labelledby='nested-list-subheader'
+			subheader={
+				<ListSubheader component='div' id='nested-list-subheader'>
+					To Do App
+				</ListSubheader>
+			}
+			className={classes.root}>
 			<ListItem button onClick={handleClick}>
 				<ListItemIcon>
-					<AssignmentIcon />
+					<InboxIcon />
 				</ListItemIcon>
 				<ListItemText primary={props.column.title} />
 				{open ? <ExpandLess /> : <ExpandMore />}
@@ -60,6 +67,6 @@ export default function NestedList(props) {
 					))}
 				</List>
 			</Collapse>
-		</>
+		</List>
 	);
 }

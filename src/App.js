@@ -13,46 +13,30 @@ import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import NestedList from './components/List';
 import Switch from '@material-ui/core/Switch';
-// import {
-// 	handlePostFirebase,
-// 	handleUpdateFirebase,
-// 	handleUpdateColumnsFirebase,
-// 	handleUpdateTasksFirebase,
-// 	fetchData,
-// 	onDragEnd,
-// 	addNewTask,
-// 	addNewColumn,
-// 	handleDeleteBtn,
-// 	handleTaskInput,
-// 	sortByTitleAz,
-// 	sortByTitleZa,
-// } from './actions/functions';
-
 const Container = styled.div`
 	display: flex;
 `;
-
 const App = () => {
-	const [data, setData] = useState(emptyData);
+	const [data, setData] = useState(initialData);
 	const fetchData = async () => {
 		const res = await db.collection('ToDo').get();
 		const DB = res.docs.map((data) => data.data());
 		setData(DB[0]);
 	};
 
-	// const handlePostFirebase = (e) => {
-	// 	db.collection('ToDo').add(e);
-	// };
+	const handlePostFirebase = (e) => {
+		db.collection('ToDo').add(e);
+	};
 	const handleUpdateFirebase = (e) => {
 		db.collection('ToDo').doc('OYOcvEIrXuxkKLo5Ndb9').update(e);
 	};
-	// const handleUpdateColumnsFirebase = (e) => {
-	// 	db.collection('columns').doc('LQdCpnOyXZib1pObRUlM').update(e);
-	// };
-	// const handleUpdateTasksFirebase = (e) => {
-	// 	db.collection('tasks').doc('v1rprG5YWMpnZxcvObuL').update(e);
-	// 	console.log(db.collection('tasks'));
-	// };
+	const handleUpdateColumnsFirebase = (e) => {
+		db.collection('columns').doc('LQdCpnOyXZib1pObRUlM').update(e);
+	};
+	const handleUpdateTasksFirebase = (e) => {
+		db.collection('tasks').doc('v1rprG5YWMpnZxcvObuL').update(e);
+		console.log(db.collection('tasks'));
+	};
 	useEffect(() => {
 		fetchData();
 		console.log('data fetching');
@@ -170,18 +154,17 @@ const App = () => {
 				},
 				columnOrder: [...data.columnOrder, `${NewColumnID}`],
 			};
-			console.log(addColumn);
+
 			setData(addColumn);
+			handleUpdateFirebase(addColumn);
 		} else {
 			console.log('An empty column added');
 			alert('You cant Add An empty Column Name');
 			return;
 		}
 	};
-	const handleDeleteBtn = (e) => {
-		console.log(e + 'delete Btn Clicked');
-
-		delete data.tasks[`${e}`];
+	const handleDeleteBtn = (id) => {
+		delete data.tasks[`${id}`];
 		let columnsWithOutDeletedTask = {
 			'': {
 				id: '',
@@ -194,7 +177,7 @@ const App = () => {
 				[`${data.columns[key].id}`]: {
 					...data.columns[key],
 					taskIds: [
-						...data.columns[key].taskIds.filter((taskId) => taskId !== e),
+						...data.columns[key].taskIds.filter((taskId) => taskId !== id),
 					],
 				},
 			};
@@ -229,8 +212,24 @@ const App = () => {
 			}
 		}
 	};
+	// const compare = (a, b) => {
+	// 	// Use toUpperCase() to ignore character casing
 
+	// 	const bandA = a.band.toUpperCase();
+	// 	const bandB = b.band.toUpperCase();
+
+	// 	let comparison = 0;
+	// 	if (bandA > bandB) {
+	// 		comparison = 1;
+	// 	} else if (bandA < bandB) {
+	// 		comparison = -1;
+	// 	}
+	// 	return comparison;
+	// };
+
+	//singers.sort(compare);
 	const sortByTitleAz = (column) => {
+		console.log(column);
 		const sortedTasks = column.taskIds.sort((a, b) => {
 			if (
 				data.tasks[a].content.toUpperCase() >
@@ -246,6 +245,7 @@ const App = () => {
 				return 0;
 			}
 		});
+		console.log(sortedTasks);
 		setData({
 			...data,
 			columns: {
@@ -258,6 +258,7 @@ const App = () => {
 		});
 	};
 	const sortByTitleZa = (column) => {
+		console.log(column);
 		const sortedTasks = column.taskIds.sort((a, b) => {
 			if (
 				data.tasks[a].content.toUpperCase() >
@@ -273,6 +274,7 @@ const App = () => {
 				return 0;
 			}
 		});
+		console.log(sortedTasks);
 		setData({
 			...data,
 			columns: {
@@ -296,6 +298,7 @@ const App = () => {
 
 		console.log('display change layout');
 	};
+
 	const useStyles = makeStyles((theme) => ({
 		root: {
 			width: '100%',

@@ -3,11 +3,24 @@ import styled from 'styled-components';
 import '../index.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
+import InputBase from '@material-ui/core/InputBase';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		'& > *': {
 			margin: theme.spacing(1),
+		},
+		iconButton: {
+			padding: 10,
+		},
+		divider: {
+			height: 28,
+			margin: 4,
+			color: 'black',
 		},
 	},
 }));
@@ -32,26 +45,26 @@ const Button = (props) => {
 	};
 	return (
 		<Container>
-			<form
-				id='add-stage-form'
-				//  onSubmit={props.addNewColumn}
-			>
-				{/* <Title>Add Stage</Title> */}
-				<p>Add Stage</p>
-				<div className='form-input-btn-wrapper'>
-					<input
+			<Paper>
+				<form
+					id='add-stage-form'
+					//  onSubmit={props.addNewColumn}
+				>
+					{/* <Title>Add Stage</Title> */}
+
+					<InputBase
 						type='text'
 						name='stageName'
-						placeholder='Enter Stage Name'
+						placeholder='Add another list'
 						onChange={handleOnChange}
 					/>
-					<button
+					<IconButton
 						type='submit'
 						onClick={(e) => props.addNewColumn(e, inputValue)}>
-						+
-					</button>
-				</div>
-			</form>
+						<AddCircleIcon style={{ color: 'green' }} />
+					</IconButton>
+				</form>
+			</Paper>
 		</Container>
 	);
 };
