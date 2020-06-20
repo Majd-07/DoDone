@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
 import Task from "./Task";
-import Sort from "./components/Sort";
+import Sort from "./Sort";
 import AddTaskForm from "./AddTaskForm";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -36,7 +36,7 @@ const TaskList = styled.div`
   padding: 8px;
   transition: background-color 0.2s ease;
   background-color: ${(props) =>
-    props.isDraggingOver ? "#e2e2e2" : "#ebecf0"};
+    props.isDraggingOver ? "skyblue" : "#9266ff"};
   flex-grow: 1;
   min-height: 100px;
   border-radius: 10px;
