@@ -1,39 +1,50 @@
-/* body {
+body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #d4016b;
-} */
+  /* background-color: #d4016b; */
+  /* background-image: url("./images/desert-4471549_1280.jpg"); */
+  background-color: #330033;
+  background-color: #000000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23220000' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23440000' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%23660000' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%23880000' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%23A00' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
 .App {
-  background-color: #3f3160;
+  /* background-color: #3f3160; */
   min-height: 500px;
   width: 95%;
   margin: 40px auto;
   border-radius: 10px;
+  flex-wrap: wrap;
 }
 
-.custom-column {
-  margin: 15px;
-  background-color: #ebecf0;
+.app-header {
+  text-align: center;
+  z-index: 100;
 }
 
 /******** Add New Stage Form *********/
 .form-input-btn-wrapper {
   position: relative;
 }
-#add-stage-form input {
-  background-color: rgba(27, 112, 137, 1);
-  border: 0;
-  color: #fff;
-  width: 150px;
-  height: 50px;
-  margin: 10px;
-  padding: 0 20px;
-  font-size: 18px;
+
+#add-stage-form {
+  display: flex;
+  background-color: hsla(0, 0%, 91%, 0.507);
+  padding: 2px 10px;
   border-radius: 10px;
+}
+
+#add-stage-form input {
+  border-radius: 7px;
+  height: auto;
+  min-height: 32px;
+  padding: 4px;
+  display: felx;
 }
 #add-stage-form p {
   background-color: rgb(38, 147, 180);
@@ -48,12 +59,12 @@
   border-radius: 10px;
 }
 #add-stage-form input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(32, 6, 6, 0.5);
 }
 #add-stage-form input:focus {
   outline: none;
 }
-#add-stage-form button {
+/* #add-stage-form button {
   height: 50px;
   width: 50px;
   border-radius: 5px;
@@ -61,7 +72,8 @@
   background-color: rgba(202, 156, 24, 1);
   cursor: pointer;
   position: absolute;
-}
+
+} */
 #add-stage-form button:focus {
   outline: none;
 }
@@ -69,7 +81,6 @@
 /******** Add New Task Form *********/
 
 /* #add-new-task-form input {
-  
   border: 0;
   color: rgb(82, 82, 82);
   width: 100px;
@@ -95,11 +106,12 @@
   border: 0;
   background-color: rgba(202, 156, 24, 1);
   cursor: pointer;
-}
+} */
+
 .task-board input {
   background-color: transparent;
   border: 0;
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-size: 14px;
 }
 .task-board input:focus {
@@ -107,11 +119,13 @@
 }
 .task-board {
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 .delete-Btn {
   position: absolute;
   right: 1px;
-} */
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

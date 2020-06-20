@@ -1,15 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
+import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 const Container = styled.div`
   border: 1px solid transparent;
   border-radius: 3px;
-  padding: 6px 8px;
+  padding: 4px 3px;
   margin-bottom: 8px;
   background-color: ${(props) => (props.isDragging ? "#fff" : "#f4f5f7")};
 `;
+
+const useStyles = makeStyles((theme) => ({
+  iconButton: {
+    padding: 10,
+  },
+}));
+
 const Task = (props) => {
+  const classes = useStyles();
+
   return (
     <Draggable draggableId={props.task.id} index={props.index}>
       {(provided, snapshot) => (
@@ -29,13 +41,14 @@ const Task = (props) => {
                   props.handleTaskInput(e.target.value, props.task.id)
                 }
               />
-              <button
-                onClick={props.handleDeleteBtn}
+              <IconButton
+                onClick={() => props.handleDeleteBtn(props.task.id)}
                 value={props.task.id}
-                className="delete-Btn"
+                className={classes.iconButton}
+                color="primary"
               >
-                x
-              </button>
+                <DeleteIcon style={{ color: "#607d8b" }} fontSize="small" />
+              </IconButton>
             </div>
           </Container>
         </Paper>

@@ -1,3 +1,13 @@
+/* .App {
+  text-align: center;
+} */
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -7,6 +17,21 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.Navbar {
+  background-color: #282c34;
+  padding: 10px 10px;
+}
+
+.react-select-container {
+  display: inline-block;
+  width: 200px;
+  margin-left: 20px;
 }
 
 .mySpan {
@@ -30,4 +55,13 @@
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

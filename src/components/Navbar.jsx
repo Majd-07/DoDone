@@ -2,24 +2,41 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import { palette, spacing, typography } from "@material-ui/system";
-
 const link = {
+  padding: "12px",
+  margin: "0 6px 6px",
   textDecoration: "none",
-  color: "white",
-  marginLeft: "10px",
-  marginRight: "20px",
-  fontSize: "18px",
+  color: "#440501",
+  display: "inline",
   fontWeight: "bold",
-  color: "black",
+  fontSize: 17,
 };
 
-const Navbar = () => (
-  <AppBar position="static" color="white" display="inline-block">
-    <List display="inline-block">
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexDirection: "row",
+    paddingLeft: 30,
+    zIndex: 0,
+    backgroundColor: "rgba(255,255,255,0.85)",
+    color: "#fff",
+    height: 36,
+    alignItems: "center",
+  },
+}));
+
+const Navbar = (props) => {
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    checkedA: true,
+    checkedB: true,
+  });
+
+  // const handleDisplayLayoutChange = (event) => {
+  // 	setState({ ...state, [event.target.name]: event.target.checked });
+  // };
+
+  return (
+    <AppBar position="static" className={classes.root}>
       <NavLink to="/" style={link}>
         Boards
       </NavLink>
@@ -27,8 +44,25 @@ const Navbar = () => (
       <NavLink to="/about" style={link}>
         About
       </NavLink>
-    </List>
-  </AppBar>
-);
+
+      {/* <Typography component='div'>
+				<Grid component='label' container alignItems='center' spacing={1}>
+					<Grid item>Off</Grid>
+					<Grid item> */}
+      {/* {<span style={{ color: 'white' }}>Off</span>}
+			<Switch
+				checked={state.checkedA}
+				onChange={props.handleDisplayLayoutChange}
+				name='checkedA'
+				inputProps={{ 'aria-label': 'secondary checkbox' }}
+			/>
+			{<span style={{ color: 'white' }}>On</span>} */}
+      {/* </Grid>
+					<Grid item>On</Grid>
+				</Grid>
+			</Typography> */}
+    </AppBar>
+  );
+};
 
 export default Navbar;

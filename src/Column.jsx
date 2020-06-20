@@ -4,67 +4,80 @@ import { Droppable } from "react-beautiful-dnd";
 import Task from "./Task";
 import Sort from "./components/Sort";
 import AddTaskForm from "./AddTaskForm";
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import "./index.css";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "15px",
-    backgroundColor: "#EBECF0",
-  },
-}));
-
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import IconButton from "@material-ui/core/IconButton";
 const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
-  border-radius: 2px;
+  border-radius: 10px;
   width: 220px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   position: relative;
-  overflow: scroll;
+  background-color: #ebecf0;
+  position: relatieve;
 `;
 const Title = styled.h4`
   padding: 8px;
-  background-color: #ebecf0;
+  background-color: lightgrey;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 `;
 
 const TaskList = styled.div`
   padding: 8px;
   transition: background-color 0.2s ease;
-  background-color: ${(props) => (props.isDraggingOver ? "f2f3f7" : "#EBECF0")};
+  background-color: ${(props) =>
+    props.isDraggingOver ? "#e2e2e2" : "#ebecf0"};
   flex-grow: 1;
   min-height: 100px;
+  border-radius: 10px;
 `;
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+    backgroundColor: "white",
+  },
+  grid: {
+    flexGrow: 1,
+  },
+});
 
 const Column = (props) => {
   const classes = useStyles();
-
   const [showPopOver, setShowPopOver] = React.useState(false);
   const onClick = () => !setShowPopOver(!showPopOver);
 
   const [column, setColumn] = [];
-  console.log(props);
+  //console.log(props);
   return (
-    <Paper elevation={3} className={classes.root}>
-      <span className="mySpan" onClick={onClick}>
-        ...
-      </span>
-      {showPopOver ? (
-        <Sort
-          handleSortAz={props.handleSortAz}
-          handleSortZa={props.handleSortZa}
-          taskIds={props.column.taskIds}
-        />
-      ) : null}
-      <Title>{props.column.title}</Title>
+    <Container>
+      <Title>
+        {props.column.title}
+        <IconButton
+          onClick={onClick}
+          size="small"
+          style={{ backgroundColor: "#eee" }}
+        >
+          <MoreVertIcon fontSize="small" />
+        </IconButton>
+        {showPopOver ? (
+          <Sort
+            handleSortAz={props.handleSortAz}
+            handleSortZa={props.handleSortZa}
+            column={props.column}
+          />
+        ) : null}
+      </Title>
 
       <Droppable
         droppableId={props.column.id}
@@ -77,22 +90,25 @@ const Column = (props) => {
             isDraggingOver={snapshot.isDraggingOver}
           >
             {props.tasks.map((task, index) => (
-              <Task
-                key={task.id}
-                task={task}
-                index={index}
-                handleDeleteBtn={props.handleDeleteBtn}
-                handleTaskInput={props.handleTaskInput}
-              />
+              <Paper elevation={3}>
+                <Task
+                  key={task.id}
+                  task={task}
+                  index={index}
+                  handleDeleteBtn={props.handleDeleteBtn}
+                  handleTaskInput={props.handleTaskInput}
+                />
+              </Paper>
             ))}
             {provided.placeholder}
           </TaskList>
         )}
       </Droppable>
+
       {props.column.title === "To Do" && (
         <AddTaskForm addNewTask={props.addNewTask} id={props.column.id} />
       )}
-    </Paper>
+    </Container>
   );
 };
 
