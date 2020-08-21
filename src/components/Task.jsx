@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const Container = styled.div`
 	border: 1px solid transparent;
 	border-radius: 3px;
-	padding: 4px 3px;
+	//padding: 4px 3px;
 	margin-bottom: 8px;
 	background-color: ${(props) => (props.isDragging ? 'lightgreen' : '#d4016b')};
 `;

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState } from 'react'
+//import { v4 as uuidv4 } from 'uuid';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import InputBase from '@material-ui/core/InputBase'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
 
-import './index.css';
+import './index.css'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -40,30 +40,30 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		padding: '0 10px',
 	},
-}));
+}))
 
 export default function AddTaskForm(props) {
-	const classes = useStyles();
+	const classes = useStyles()
 	//console.log(props);
-	const [task, setTask] = useState({ taskName: { id: '', content: '' } });
-	let x = 10;
-	let taskName = `task${x}`;
+	const [task, setTask] = useState({ taskName: { id: '', content: '' } })
+	let x = 10
+	//let taskName = `task${x}`
 	const handleTaskInput = (e) => {
 		//let taskID = uuidv4();
-		let taskID = Date.now();
+		let taskID = Date.now()
 
 		setTask({
 			[`${taskID}`]: { id: `${taskID}`, content: e.target.value },
-		});
-	};
+		})
+	}
 	const handleAddNewTask = (e) => {
-		console.log(task);
-		e.preventDefault();
-		props.addNewTask(task, props.id);
-		setTask({ taskName: { id: '', content: '' } });
+		console.log(task)
+		e.preventDefault()
+		props.addNewTask(task, props.id)
+		setTask({ taskName: { id: '', content: '' } })
 		//console.log(task[Object.keys(task)].content);
 		//console.log("btn clicked to submit");
-	};
+	}
 	return (
 		<Paper component='form' className={classes.root}>
 			<form onSubmit={handleAddNewTask} className={classes.form}>
@@ -85,7 +85,7 @@ export default function AddTaskForm(props) {
 				</IconButton>
 			</form>
 		</Paper>
-	);
+	)
 }
 
 /* 		<form id="add-new-task-form" onSubmit={handleAddNewTask}>

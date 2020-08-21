@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import './index.css';
-import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputBase from '@material-ui/core/InputBase';
-import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import './index.css'
+import { makeStyles } from '@material-ui/core/styles'
+//import Input from '@material-ui/core/Input';
+import InputBase from '@material-ui/core/InputBase'
+import Paper from '@material-ui/core/Paper'
+//import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
 			color: 'black',
 		},
 	},
-}));
-const Title = styled.h3`
-	padding: 8px;
-	background-color: #9266ff;
-`;
+}))
+//const Title = styled.h3`
+// 	padding: 8px;
+// 	background-color: #9266ff;
+// `;
 const Container = styled.div`
 	margin: 8px;
 	//border: 1px solid lightgrey;
@@ -35,14 +35,14 @@ const Container = styled.div`
 	//width: 220px;
 	display: flex;
 	flex-direction: column;
-`;
+`
 const Button = (props) => {
-	const classes = useStyles();
-	const [inputValue, setInputValue] = useState('');
+	//const classes = useStyles()
+	const [inputValue, setInputValue] = useState('')
 	const handleOnChange = (e) => {
-		console.log(e);
-		setInputValue(e.target.value);
-	};
+		console.log(e)
+		setInputValue(e.target.value)
+	}
 	return (
 		<Container>
 			<Paper>
@@ -66,6 +66,6 @@ const Button = (props) => {
 				</form>
 			</Paper>
 		</Container>
-	);
-};
-export default Button;
+	)
+}
+export default Button
