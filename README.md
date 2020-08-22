@@ -1,3 +1,8 @@
+## DoDone project is kanBoard app build using React js, firebase as database, react beutifull DnD and styled component for styling.
+you can add columns and tasks, and change the task state by drag and drop.
+the data stored in firebase.
+
+ 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
