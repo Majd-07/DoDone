@@ -7,5 +7,6 @@ like any kanBoard app, you can add columns and tasks, and change the task's stat
 
 * This project is Implemented using ReactJS and styled with styled component.
 * Utilized react beautiful DnD for drag and drop functionality.
-* Utilized firebase to store tasks and enables data modification.
+* Utilized Firebase to store tasks and enables data modification.
+
 Demo on Netlify: https://dodone.netlify.app/
